@@ -7,8 +7,4 @@ class Like < ApplicationRecord
   def plus_counter
     post.increment!(:likescounter)
   end
-
-  def minus_counter
-    post.decrement!(:likescounter)
-  end
 end

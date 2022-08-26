@@ -1,0 +1,37 @@
+<div class="flex my-4 border border-gray-700 rounded-md">
+  <img src="<%= @user.photo %>" class="w-1/5 rounded-l-md"/>
+  <div class="px-2 pt-4 flex flex-col grow">
+    <div class="flex flex-row justify-between">
+      <h2 class="text-lg font-bold text-sky-600 hover:text-sky-700"><%= link_to @user.name, @user %></h2>
+      <p class="text-sm font-bold">Number of Posts:
+        <%= @user.posts.count %></p>
+    </div>
+    <div class="mt-2">
+      <h3 class="text-sm font-semibold">Bio:</h3>
+      <p class="text-sm"><%= @user.bio %></p>
+    </div>
+  </div>
+</div>
+<h2 class="font-bold mx-2 my-6 text-lg">
+  Most recent posts
+</h2>
+<% @user.three_recent_post.each do |post| %>
+  <div class="rounded-md border p-2 m-4">
+    <h1
+      class="
+        font-semibold
+        text-md
+        text-sky-600
+        hover:text-sky-700
+      "
+    ><%= link_to post.title, [@user, post] %></h1>
+    <p class="text-sm truncate my-2"><%= post.text %></p>
+    <p class="text-right text-sm font-bold">Comments:
+      <%= post.commentscounter || 0 %>
+      Likes:
+      <%= post.likescounter || 0 %></p>
+  </div>
+<% end %>
+<div class="flex flex-row justify-center">
+  <%= link_to 'See all posts', user_posts_path(@user), class: "border bg-sky-500 hover:bg-sky-600 p-2 font-bold rounded-md" %>
+</div>

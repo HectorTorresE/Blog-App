@@ -1,0 +1,40 @@
+<div class="flex my-4 border border-gray-700 rounded-md">
+  <img src="<%= @user.photo %>" class="w-1/5 rounded-l-md"/>
+  <div class="px-2 pt-4 flex flex-col grow">
+    <h2 class="text-lg font-bold text-sky-600 hover:text-sky-700"><%= link_to @user.name, @user %></h2>
+    <p class="text-sm font-bold">Number of Posts:
+      <%= @user.posts.count %>
+    </p>
+  </div>
+</div>
+<% @posts.each do |post| %>
+  <div class="border rounded-md p-2 m-4">
+    <h2
+      class="
+        font-semibold
+        text-md
+        text-sky-600
+        hover:text-sky-700
+        underline
+        underline-offset-2
+      "
+    ><%= link_to post.title, [@user, post] %></h2>
+    <p class="text-sm truncate my-2"><%= post.text %></p>
+    <p class="text-right text-sm font-bold">Comments:
+      <%= post.commentscounter %>
+      Likes:
+      <%= post.likescounter %></p>
+    <hr>
+    <div class="comments">
+      <h4 class="font-semibold mt-4">Comments:</h4>
+      <ul>
+        <% post.comments.take(5).each do |comment| %>
+          <li class="my-2">
+            <span class="font-semibold"><%= comment.author.name %></span>:
+            <%= comment.text %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
