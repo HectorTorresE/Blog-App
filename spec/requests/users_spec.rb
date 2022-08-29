@@ -1,6 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'testing users_controller', type: :request do
+RSpec.describe 'testing users', type: :request do
+  before do
+    @fisrt_user = User.new(name: 'Mateo', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Peru.',
+                           postscounter: 0)
+    @fisrt_user.save
+  end
+
   context 'testing users#index' do
     it 'returns http 200 response' do
       get '/users'
@@ -14,8 +20,7 @@ RSpec.describe 'testing users_controller', type: :request do
 
     it 'renders a html containing a <h1>users<h1> tag' do
       get '/users'
-      expect(response.body).to include('<h1>users<h1>')
-      # expect(response.body).to include('<h1 class="text-xl font-bold">users</h1>')
+      expect(response.body).to include('<h1 class="text-xl font-bold">users</h1>')
     end
   end
 
@@ -29,7 +34,7 @@ RSpec.describe 'testing users_controller', type: :request do
       get '/users/1'
       expect(response).to render_template(:show)
     end
-    
+
     it 'renders html with <p>Number of Posts:</p>' do
       get '/users/1'
       expect(response.body).to include('Number of Posts:')
